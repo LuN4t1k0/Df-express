@@ -1,0 +1,14 @@
+{
+  "name": "desafio2",
+  "version": "1.0.0",
+  "description": "Desfio N2 express desafioLatam",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cristian Venegas",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
