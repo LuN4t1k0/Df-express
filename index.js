@@ -1,11 +1,11 @@
 const express = require("express");
 const fs = require("fs")
-const bodyParser = require("body-parser")
+
 const app = express();
 const PORT = 3000;
 
 app.use(express.json())
-app.use(bodyParser.json())
+
 
 
 
@@ -29,8 +29,20 @@ app.post("/canciones", (req, res) => {
 
 app.put("/canciones/:id", (req, res) => {
   const {id} = req.params
+  const cancion = req.body
   const canciones = JSON.parse(fs.readFileSync("repertorio.json", "utf8"))
-  const index = canciones.findIndex((cancion) => cancion.id === id) 
+  const index = canciones.findIndex((cancion) => cancion.id === parseInt(id)) 
+  canciones[index] = cancion
+  fs.writeFileSync("repertorio.json", JSON.stringify(canciones))
+  res.send("Cancion Actualizada")
+})
 
+app.delete("/canciones/:id", (req, res) => {
+  const {id} = req.params
+  const canciones = JSON.parse(fs.readFileSync("repertorio.json", "utf8"))
+  const index = canciones.findIndex((cancion) => cancion.id === parseInt(id)) 
+  canciones.splice(index, 1)
+  fs.writeFileSync("repertorio.json", JSON.stringify(canciones))
+  res.send("Cancion eliminada")
 })
 
